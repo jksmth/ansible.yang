@@ -1,0 +1,3 @@
+---
+minor_changes:
+  - Ensure only non-whitespace characters are matched when finding dependant imports
