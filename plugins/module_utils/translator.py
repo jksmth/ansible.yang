@@ -418,7 +418,6 @@ class Translator(object):
                 "Generating json data in temp file '%s' by executing command '%s'"
                 % (json_file_path, " ".join(sys.argv))
             )
-        time.sleep(5)
 
         try:
             os.system(" ".join(sys.argv))
