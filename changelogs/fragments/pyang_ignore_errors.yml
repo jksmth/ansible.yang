@@ -1,0 +1,4 @@
+
+---
+minor_changes:
+  - added optional attribute for get action to ignore errors produced by pyang
