@@ -187,8 +187,8 @@ class Translator(object):
             )
         try:
             self._pyang_module.run()
-        except SystemExit:
-            pass
+        except SystemExit as e:
+            sys_exit = e
         except Exception as e:
             shutil.rmtree(
                 os.path.realpath(os.path.expanduser(tmp_dir_path)),
@@ -199,7 +199,7 @@ class Translator(object):
             )
         finally:
             err = sys.stderr.getvalue()
-            if err and "error" in err.lower():
+            if err and sys_exit.code != 0:
                 if not self._keep_tmp_files:
                     shutil.rmtree(
                         os.path.realpath(os.path.expanduser(tmp_dir_path)),
@@ -237,11 +237,11 @@ class Translator(object):
             raise ValueError(
                 "Error while translating to text: %s" % str(uni_error)
             )
-        except SystemExit:
-            pass
+        except SystemExit as e:
+            sys_exit = e
         finally:
             err = sys.stderr.getvalue()
-            if err and "error" in err.lower():
+            if err and sys_exit.code != 0:
                 if not self._keep_tmp_files:
                     shutil.rmtree(
                         os.path.realpath(os.path.expanduser(tmp_dir_path)),
@@ -374,8 +374,8 @@ class Translator(object):
             )
         try:
             self._pyang_module.run()
-        except SystemExit:
-            pass
+        except SystemExit as e:
+            sys_exit = e
         except Exception as e:
             if not self._keep_tmp_files:
                 shutil.rmtree(
@@ -387,7 +387,7 @@ class Translator(object):
             )
         finally:
             err = sys.stderr.getvalue()
-            if err and "error" in err.lower():
+            if err and sys_exit.code != 0:
                 if not self._keep_tmp_files:
                     shutil.rmtree(
                         os.path.realpath(os.path.expanduser(tmp_dir_path)),
@@ -422,11 +422,11 @@ class Translator(object):
 
         try:
             os.system(" ".join(sys.argv))
-        except SystemExit:
-            pass
+        except SystemExit as e:
+            sys_exit = e
         finally:
             err = sys.stderr.getvalue()
-            if err and "error" in err.lower():
+            if err and sys_exit.code != 0:
                 if not self._keep_tmp_files:
                     shutil.rmtree(
                         os.path.realpath(os.path.expanduser(tmp_dir_path)),
